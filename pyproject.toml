@@ -1,0 +1,20 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "instawow_townlong_yak_plugin"
+author = "layday"
+author-email = "layday@protonmail.com"
+home-page = "https://github.com/layday/instawow-townlong-yak-plugin"
+classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
+description-file = "README.rst"
+requires-python = "~=3.7"
+requires = [
+  "instawow",
+  "typing_extensions",
+  "yarl",
+]
+
+[tool.flit.entrypoints."instawow.plugins"]
+instawow_townlong_yak_plugin = "instawow_townlong_yak_plugin"

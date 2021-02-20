@@ -13,7 +13,7 @@ from typing_extensions import Literal, TypedDict
 from yarl import URL
 
 
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
 
 class WowUpHubAddon(TypedDict):
@@ -55,7 +55,7 @@ class TownlongYakResolver(Resolver):
     name = 'Townlong Yak (via WowUp.Hub)'
     strategies = frozenset({Strategy.default})
 
-    _api_url = 'https://hub.dev.wowup.io/addons/author/foxlit'
+    _api_url = 'https://hub.wowup.io/addons/author/foxlit'
 
     @staticmethod
     def get_alias_from_url(value: str) -> str | None:

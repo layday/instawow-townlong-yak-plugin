@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from instawow.manager import cache_response
-from instawow.models import Pkg, PkgOptions
+from instawow.models import Pkg
 import instawow.plugins
 from instawow.resolvers import Defn, Strategy, Resolver
 from instawow.results import PkgNonexistent, PkgStrategyUnsupported, PkgFileUnavailable
@@ -102,7 +102,7 @@ class TownlongYakResolver(Resolver):
             download_url=file['download_url'],
             date_published=datetime.now(timezone.utc),
             version=file['tag_name'],
-            options=PkgOptions(strategy=defn.strategy),
+            options={'strategy': defn.strategy},
         )
 
 

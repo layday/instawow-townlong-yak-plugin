@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
+from instawow.common import Strategy
 from instawow.manager import cache_response
 from instawow.models import Pkg
 import instawow.plugins
-from instawow.resolvers import Defn, Strategy, Resolver
-from instawow.results import PkgNonexistent, PkgStrategyUnsupported, PkgFileUnavailable
+from instawow.resolvers import BaseResolver, Defn, Resolver
+from instawow.results import PkgNonexistent, PkgFileUnavailable
 from typing_extensions import Literal, TypedDict
 from yarl import URL
 
@@ -50,7 +51,7 @@ class WowUpHubAddons(TypedDict):
     addons: list[WowUpHubAddon]
 
 
-class TownlongYakResolver(Resolver):
+class TownlongYakResolver(BaseResolver):
     source = 'townlong-yak'
     name = 'Townlong Yak (via WowUp.Hub)'
     strategies = frozenset({Strategy.default})
@@ -74,9 +75,6 @@ class TownlongYakResolver(Resolver):
             return {URL(a['repository']).name: a for a in foxlit_addons['addons']}
 
     async def resolve_one(self, defn: Defn, metadata: None) -> Pkg:
-        if defn.strategy not in self.strategies:
-            raise PkgStrategyUnsupported(defn.strategy)
-
         addons = await self._synchronise()
         try:
             addon = addons[defn.alias]
